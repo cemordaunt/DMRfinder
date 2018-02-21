@@ -1,7 +1,7 @@
 # DMRfinder
 A pipeline to identify differentially-methylated regions from whole-genome bisulfite sequencing data
 
-Required arguments:\n
+Required arguments:
         -n, --chrNum = chromosome number
         -d, --setwd = working directory
         -c, --numCtrl = number of control samples
