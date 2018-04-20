@@ -1,11 +1,11 @@
 #!/usr/bin/env Rscript
 
-# Updated 12/8/17
-# Authors: Keith Dunaway and Charles Mordaunt
+# Updated 4/20/18
+# Authors: Charles Mordaunt
 # This code is to be used on cabernet.genomecenter.ucdavis.edu
 
 cat("\n[DMRmethyl]\n\nA pipeline to retrieve smoothed methylation and coverage in predefined differentially-methylated regions 
-    from whole-genome bisulfite sequencing data.Note: CpGs are subsetted based on coverage in Ctrl and Exp samples.\n\n")
+    from whole-genome bisulfite sequencing data.Note: CpGs are subsetted based on coverage in Ctrl, Exp, and DisCtrl samples.\n\n")
 
 #################################################
 # Functions 
@@ -29,7 +29,7 @@ print_help_compact <- function (object) {
                 cat("\n")
         }
         cat("\nOptional arguments:", sep = "\n")
-        for (ii in 9:11) {
+        for (ii in 9:12) {
                 option <- options_list[[ii]]
                 cat("\t")
                 if (!is.na(option@short_flag)) cat(option@short_flag, ", ", sep = "")
@@ -37,7 +37,7 @@ print_help_compact <- function (object) {
                 cat("\n")
         }
         cat("\nOutput arguments:", sep = "\n")
-        for (ii in 12:13) {
+        for (ii in 13:14) {
                 option <- options_list[[ii]]
                 cat("\t")
                 if (!is.na(option@short_flag)) cat(option@short_flag, ", ", sep = "")
@@ -69,6 +69,7 @@ option_list <- list(
         # Optional arguments
         make_option(opt_str = c("--pctMinCtrl"), type = "double", default = 0.9, help = "minimum percent of control samples with 1 read at CpG [default = 0.9]"),
         make_option(opt_str = c("--pctMinExp"), type = "double", default = 0.9, help = "minimum percent of experimental samples with 1 read at CpG [default = 0.9]"),
+        make_option(opt_str = c("--pctMinDisCtrl"), type = "double", default = 0.9, help = "minimum percent of disease control samples with 1 read at CpG [default = 0.9]"),
         make_option(opt_str = c("--mc.cores"), type = "integer", default = 1, help = "cores to use, same as SBATCH -n [default = 1]"),
        
         # Output arguments
@@ -129,6 +130,7 @@ outprefix <- as.character(opt$options$outprefix)
 DMRfile <- as.character(opt$options$DMRfile)
 numMinCtrl <- ceiling(as.numeric(opt$options$pctMinCtrl)*numCtrl)               
 numMinExp <- ceiling(as.numeric(opt$options$pctMinExp)*numExp)
+numMinDisCtrl <- ceiling(as.numeric(opt$options$pctMinDisCtrl)*numDisCtrl)
 mc.cores <- as.numeric(opt$options$mc.cores)                 
 meth <- as.logical(opt$options$meth)
 cov <- as.logical(opt$options$cov)
@@ -200,7 +202,9 @@ if(dim(DMRs)[1] > 0){
         # Subset BSobject by coverage
         cat("\n[DMRmethyl] Subsetting BSobject by coverage\n")
         BSobj_cov <- getCoverage(BSobj_smoothed)
-        keep_loci <- which(rowSums(BSobj_cov[, BSobj_smoothed$type == "Ctrl"] >= 1) >= numMinCtrl & rowSums(BSobj_cov[, BSobj_smoothed$type == "Exp"] >= 1) >= numMinExp)
+        keep_loci <- which(rowSums(BSobj_cov[, BSobj_smoothed$type == "Ctrl"] >= 1) >= numMinCtrl 
+                           & rowSums(BSobj_cov[, BSobj_smoothed$type == "Exp"] >= 1) >= numMinExp
+                           & rowSums(BSobj_cov[, BSobj_smoothed$type == "DisCtrl"] >= 1) >= numMinDisCtrl)
         BSobj_keep <- BSobj_smoothed[keep_loci,]
 
         # Output smoothed methylation in each DMR for each sample
