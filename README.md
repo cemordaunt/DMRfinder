@@ -81,13 +81,13 @@ Example plot of DMR methylation
 ## Required arguments:  
 These arguments are required for running DMRplot
 
-        -n, --chrNum = chromosome number [required]  
-        -d, --setwd = working directory [required]  
-        -r, --regions = bed file of predefined regions with header, (chr, start, end) [required]  
-        -c, --numCtrl = total number of control samples [required]  
-        -e, --numExp = total number of experimental samples [required]  
-        -g, --genome = genome assembly (hg38, hg19, mm10, rn6, rheMac8) [required]  
-        -o, --outprefix = title used in all output files [required]  
+        -n, --chrNum = chromosome number (1-25, depending on genome, last 3 are chrX, chrY, chrM) 
+        -d, --setwd = working directory
+        -r, --regions = bed file of predefined regions with header, (chr, start, end) 
+        -c, --numCtrl = total number of control samples 
+        -e, --numExp = total number of experimental samples 
+        -g, --genome = genome assembly (hg38, hg19, mm10, rn6, rheMac8)
+        -o, --outprefix = title used in all output files
         
 ## Optional arguments:
 These arguments generally don't need to be changed. For parallel processing for smoothing, increase mc.cores. For more stringent DMR criteria, increase pctMinCtrl and pctMinExp to 1 (CpGs have 1 read in all samples) and increase meanDiff_cutoff to 0.1 (DMRs have at least 10% difference between groups). Make sure to keep these settings the same as when the original DMRs were called.
@@ -117,7 +117,7 @@ This call is submitted from the shell runs DMRplot on chromosome 21, comparing 3
 ## Required arguments: 
 These arguments are required for running DMRmethyl
 
-        -n, --chrNum = chromosome number  
+        -n, --chrNum = chromosome number (1-25, depending on genome, last 3 are chrX, chrY, chrM) 
         -d, --setwd = working directory 
         -r, --regions = bed file of predefined regions with header, (chr, start, end)
         -c, --numCtrl = number of control samples  
