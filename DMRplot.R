@@ -121,7 +121,6 @@ plotRegion2 <- function (BSseq, region = NULL, extend = 0, main = "", addRegions
                         pointsMinCov = pointsMinCov, highlightMain = highlightMain)
         gr <- bsseq:::.bsGetGr(BSseq, region, extend)
         if (!is.null(BSseqStat)) {
-                BSseqStat <- subsetByOverlaps(BSseqStat, gr)
                 if (is(BSseqStat, "BSseqTstat")) {
                         stat.values <- as.array(getStats(BSseqStat)[, "tstat.corrected"])
                         stat.values <- as.array(stat.values)
@@ -177,8 +176,6 @@ plotManyRegions2 <- function (BSseq, regions = NULL, extend = 0, main = "", addR
         }
         gr <- resize(gr, width = 2 * extend + width(gr), fix = "center")
         BSseq <- subsetByOverlaps(BSseq, gr)
-        if (!is.null(BSseqStat)) 
-                BSseqStat <- subsetByOverlaps(BSseqStat, gr)
         if (length(start(BSseq)) == 0) 
                 stop("No overlap between BSseq data and regions")
         if (!is.null(main) && length(main) != length(gr)) 
