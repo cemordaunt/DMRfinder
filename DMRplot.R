@@ -13,28 +13,30 @@ cat("\n[DMRplot]\n\nPlot smoothed methylation in target regions from whole-genom
 # Functions ###
 cat("\n[DMRplot] Loading functions\n\n")
 
-# Prints help for an Option Parser object, more compact than print_help()
-# Modified from optparse package
 print_help_compact <- function (object) {
-        cat("\n")
+        # Originally written by Trevor Davis as part of optparse package
+        # Modified by Charles Mordaunt
+        # Prints help for an Option Parser object, more compact than print_help()
         cat(object@usage, fill = TRUE)
-        cat("\n")
         cat(object@description, fill = TRUE)
-        cat("\n")
-        cat("Options:", sep = "\n")
+        cat("Required arguments:", sep = "\n")
         options_list <- object@options
-        for (ii in seq_along(options_list)) {
+        for (ii in 1:7) {
                 option <- options_list[[ii]]
                 cat("\t")
-                if (!is.na(option@short_flag)) {
-                        cat(option@short_flag, ", ", sep = "")
-                }
-                if (!is.null(option@long_flag)) {
-                        cat(option@long_flag, " = ", option@help, sep = "")
-                }
+                if (!is.na(option@short_flag)) cat(option@short_flag, ", ", sep = "")
+                if (!is.null(option@long_flag)) cat(option@long_flag, " = ", option@help, sep = "")
                 cat("\n")
         }
-        cat("\n", object@epilogue, "\n", fill = TRUE)
+        cat("\nOptional arguments:", sep = "\n")
+        for (ii in 8:17) {
+                option <- options_list[[ii]]
+                cat("\t")
+                if (!is.na(option@short_flag)) cat(option@short_flag, ", ", sep = "")
+                if (!is.null(option@long_flag)) cat(option@long_flag, " = ", option@help, sep = "")
+                cat("\n")
+        }
+        cat(object@epilogue, fill = TRUE, sep = "")
         return(invisible(NULL))
 }
 
@@ -262,13 +264,17 @@ plotAnnoTrack2 <- function (gr, annoTrack, cex) # make thicker, add border
 library(optparse)
 cat("[DMRplot] Getting arguments from bash script\n\n")
 option_list <- list(
-        make_option(opt_str = c("--chrNum"), type = "integer", default = NULL, help = "chromosome number [required]"),
-        make_option(opt_str = c("--setwd"), type = "character", default = NULL, help = "working directory [required]"),
-        make_option(opt_str = c("--regions"), type = "character", default = NULL, help = "bed file of regions to plot, no header [required]"),
-        make_option(opt_str = c("--numCtrl"), type = "integer", default = NULL, help = "total number of control samples [required]"),
-        make_option(opt_str = c("--numExp"), type = "integer", default = NULL, help = "total number of experimental samples [required]"),
-        make_option(opt_str = c("--genome"), type = "character", default = NULL, help = "genome assembly (hg38, hg19, mm10, rn6, rheMac8) [required]"),
-        make_option(opt_str = c("--outprefix"), type = "character", default = NULL, help = "title used in all output files [required]"),
+        # Required arguments
+        make_option(opt_str = c("-n", "--chrNum"), type = "integer", default = NULL, help = "chromosome number [required]"),
+        make_option(opt_str = c("-d", "--setwd"), type = "character", default = NULL, help = "working directory [required]"),
+        make_option(opt_str = c("-r", "--regions"), type = "character", default = NULL, help = "text file of regions to plot, with header, (chr, start, end) [required]"),
+        make_option(opt_str = c("-c", "--numCtrl"), type = "integer", default = NULL, help = "total number of control samples [required]"),
+        make_option(opt_str = c("-e", "--numExp"), type = "integer", default = NULL, help = "total number of experimental samples [required]"),
+        make_option(opt_str = c("-g", "--genome"), type = "character", default = NULL, help = "genome assembly (hg38, hg19, mm10, rn6, rheMac8) [required]"),
+        make_option(opt_str = c("-o", "--outprefix"), type = "character", default = NULL, help = "title used in all output files [required]"),
+        
+        # Optional arguments
+        make_option(opt_str = c("--extend"), type = "integer", default = 5000, help = "number of bases to plot on either side of each region [default = 5000]"),
         make_option(opt_str = c("--pctMinCtrl"), type = "double", default = 0.9, help = "minimum percent of control samples with 1 read at CpG [default = 0.9]"),
         make_option(opt_str = c("--pctMinExp"), type = "double", default = 0.9, help = "minimum percent of experimental samples with 1 read at CpG [default = 0.9]"),
         make_option(opt_str = c("--mc.cores"), type = "integer", default = 1, help = "cores to use, same as SBATCH -n [default = 1]"),
@@ -277,10 +283,10 @@ option_list <- list(
         make_option(opt_str = c("--maxGap"), type = "integer", default = 300, help = "maximum distance between all consecutive CpGs in a DMR [default = 300]"),
         make_option(opt_str = c("--invdensity_cutoff"), type = "integer", default = 300, help = "maximum average distance between consecutive CpGs in a DMR [default = 300]"),
         make_option(opt_str = c("--colorCtrl"), type = "character", default = "3366CC", help = "color for control samples in plots [default = 3366CC]"),
-        make_option(opt_str = c("--colorExp"), type = "character", default = "FF3366", help = "color for experimental samples in plots [default = FF3366]"),
-        make_option(opt_str = c("--help"), type = "logical", default = FALSE, action = "store_true", help = "Show this help message and exit [default = FALSE]")
+        make_option(opt_str = c("--colorExp"), type = "character", default = "FF3366", help = "color for experimental samples in plots [default = FF3366]")
 )
-opt_obj <- OptionParser(option_list = option_list, epilogue = "Add DSS_file prefixes after all other arguments, with all control samples first (DSS_files/CTRL01_)", add_help_option = FALSE)
+opt_obj <- OptionParser(option_list = option_list, epilogue = "Add DSS_file prefixes after all other arguments, with all control samples first (DSS_files/CTRL01_)", 
+                        add_help_option = TRUE, usage = "usage: %prog [arguments]")
 opt <- parse_args(object = opt_obj, positional_arguments = c(0, Inf), print_help_and_exit = FALSE)
           
 # Test for required arguments
@@ -298,11 +304,14 @@ cat("\n", str(opt))
 # Assign arguments to global variables
 chrNum <- as.numeric(opt$options$chrNum)
 setwd(as.character(opt$options$setwd))
-regions <- read.delim(file = as.character(opt$options$regions), header = TRUE, sep = "\t")
+regions <- read.delim(file = as.character(opt$options$regions), header = FALSE, sep = "\t")
+regions <- regions[2:nrow(regions),]
+colnames(regions) <- c("chr", "start", "end")
 numCtrl <- as.numeric(opt$options$numCtrl)                  
 numExp <- as.numeric(opt$options$numExp) 
 genome <- as.character(opt$options$genome)
 outprefix <- as.character(opt$options$outprefix)
+extend <- as.numeric(opt$options$extend)
 numMinCtrl <- ceiling(as.numeric(opt$options$pctMinCtrl)*numCtrl)               
 numMinExp <- ceiling(as.numeric(opt$options$pctMinExp)*numExp)
 mc.cores <- as.numeric(opt$options$mc.cores)                 
@@ -332,48 +341,42 @@ cat("\nlibrary(GenomicRanges)\n"); library(GenomicRanges, logical.return = TRUE,
 cat("\nlibrary(scales)\n"); library(scales, logical.return = TRUE, quietly = TRUE)
 
 #################################################
-# DMRfinder Pipeline
+# DMRplot Pipeline
 #################################################
 
 #Set up variables
 CTRLgroup <- paste("C",1:numCtrl,sep="")
 EXPgroup <- paste("E",1:numExp,sep="")
 
-# Load Genes and CGIs
+# Get gene and CpG island bed file names
 cat("\n[DMRplot] Loading genes and CpG islands\n")
 if(genome == "hg38"){
         CGI_bedfile <- "/share/lasallelab/genomes/hg38/GTF/hg38_genome_CGI.bed"
         Genes_bedfile <- "/share/lasallelab/genomes/hg38/GTF/hg38_RefSeq_Genes.bed"
-        #GenesPlus_bedfile <- "/share/lasallelab/genomes/hg38/GTF/hg38_RefSeq_Genes_Plus.bed"
-        #GenesMinus_bedfile <- "/share/lasallelab/genomes/hg38/GTF/hg38_RefSeq_Genes_Minus.bed"
 } else if(genome == "hg19"){
         CGI_bedfile <- "/share/lasallelab/genomes/hg19/GTF/hg19_genome_CGI.bed"
-        GenesPlus_bedfile <- "/share/lasallelab/genomes/hg19/GTF/hg19_RefSeq_Genes_Plus.bed"
-        GenesMinus_bedfile <- "/share/lasallelab/genomes/hg19/GTF/hg19_RefSeq_Genes_Minus.bed"
+        Genes_bedfile <- "/share/lasallelab/genomes/hg19/GTF/hg19_RefSeq_Genes.bed"
 } else if(genome == "mm10"){
         CGI_bedfile <- "/share/lasallelab/genomes/mm10/GTF/mm10_genome_CGI.bed"
-        GenesPlus_bedfile <- "/share/lasallelab/genomes/mm10/GTF/mm10_RefSeq_Genes_Plus.bed"
-        GenesMinus_bedfile <- "/share/lasallelab/genomes/mm10/GTF/mm10_RefSeq_Genes_Minus.bed"
+        Genes_bedfile <- "/share/lasallelab/genomes/mm10/GTF/mm10_RefSeq_Genes.bed"
 } else if(genome == "rn6"){
         CGI_bedfile <- "/share/lasallelab/genomes/rn6/GTF/rn6_genome_CGI.bed"
-        GenesPlus_bedfile <- "/share/lasallelab/genomes/rn6/GTF/rn6_RefSeq_Genes_Plus.bed"
-        GenesMinus_bedfile <- "/share/lasallelab/genomes/rn6/GTF/rn6_RefSeq_Genes_Minus.bed"         
+        Genes_bedfile <- "/share/lasallelab/genomes/rn6/GTF/rn6_RefSeq_Genes.bed"
 } else if(genome == "rheMac8"){
         CGI_bedfile <- "/share/lasallelab/genomes/rheMac8/GTF/rheMac8_genome_CGI.bed"                   
-        GenesPlus_bedfile <- "/share/lasallelab/genomes/rheMac8/GTF/rheMac8_RefSeq_Genes_Plus.bed"
-        GenesMinus_bedfile <- "/share/lasallelab/genomes/rheMac8/GTF/rheMac8_RefSeq_Genes_Minus.bed"         
+        Genes_bedfile <- "/share/lasallelab/genomes/rheMac8/GTF/rheMac8_RefSeq_Genes.bed"
 } else{cat(paste("Warning! Gene locations unknown because genome is defined as ",genome,"\n"))}
 
-genome_CpG_islands <- bed_to_granges(CGI_bedfile)
-#genome_genes_plus <- bed_to_granges(GenesPlus_bedfile)
-#genome_genes_minus <- bed_to_granges(GenesMinus_bedfile)
-genome_list <- list(genome_CpG_islands) #, genome_genes_plus, genome_genes_minus)
-names(genome_list) <- c("CGI") #, "+", "-")
-
+# Load genes bed file
 genome_genes <- read.delim(Genes_bedfile, header=FALSE)
 colnames(genome_genes) <- c("chr", "start", "end", "gene_name", "space", "strand")
 genome_genes$strand <- as.character(genome_genes$strand)
 genome_genes$gene_name <- as.character(genome_genes$gene_name)
+
+# Load CpG islands bed file
+genome_CpG_islands <- bed_to_granges(CGI_bedfile)
+genome_list <- list(genome_CpG_islands)
+names(genome_list) <- c("CGI")
 
 # Load chromosome data
 if(genome == "hg38" | genome == "hg19"){chroms = paste("chr",1:22,sep=""); chroms = c(chroms,"chrX","chrY", "chrM")
@@ -388,7 +391,6 @@ cat("\n[DMRplot] Loading", chrom, "DSS files\n")
 DSSlist = list(read.table(paste(DSSprefix[1],chrom,".DSS.txt",sep=""), header=TRUE))
 for(i in 2:length(DSSprefix))
         DSSlist = c(DSSlist,list(read.table(paste(DSSprefix[i],chrom,".DSS.txt",sep=""), header=TRUE)))
-DSSlist = lapply(DSSlist, subset, pos > min(regions$start)-50000 & pos < max(regions$end) + 50000) #Filters DSS files to near region of interest
 
 # Make BSobject and smooth
 cat("\n[DMRplot] Making BSobject and smoothing\n")
@@ -428,7 +430,7 @@ if(length(all_DMRs[,1]) > 0){
 cat("\n[DMRplot] Printing region plots\n")
 dmrfilename = paste(outprefix, chrom, "region_plots.pdf", sep = "_")
 pdf(file = dmrfilename, width = 6.7, height = 3.25)  #Opens file for figures
-plotManyRegions2(BSseq = BSobj_smoothed, regions = regions, extend = 0, addRegions = silver_DMRs,
+plotManyRegions2(BSseq = BSobj_smoothed, regions = regions, extend = extend, addRegions = silver_DMRs,
                 lwd = rep(1.1, numCtrl+numExp), verbose = FALSE, BSseqStat = BSobj_tstat, stat.lwd = 1.3,
                 stat.ylim = c(-6,6), geneTrack = genome_genes, cex.gene = 1.1, annoTrack = genome_list, cex.anno = 0.8)
 dev.off()
