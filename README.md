@@ -72,7 +72,7 @@ This call is submitted from the shell and runs DMRfinder on chromosome 21, compa
 
         Rscript --vanilla /share/lasallelab/programs/DMRfinder/DMRfinder5.R -n 21 -d /share/lasallelab/Charles/CM_WGBS_CordBlood -c 3 -e 3 -a hg38 -o DMRfinder DSS_files/JLCM001A_ DSS_files/JLCM001C_ DSS_files/JLCM002A_ DSS_files/JLCM001B_ DSS_files/JLCM001D_ DSS_files/JLCM002B_
 
-![Example DMR plot](https://github.com/cemordaunt/DMRfinder/DMRplot.png)
+![Example DMR plot](https://github.com/cemordaunt/DMRfinder/blob/master/DMRplot.png)
 
 # DMRplot  
 #### A pipeline to plot smoothed methylation in target regions from whole-genome bisulfite sequencing data  
