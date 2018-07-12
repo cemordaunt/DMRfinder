@@ -74,7 +74,7 @@ This call is submitted from the shell and runs DMRfinder on chromosome 21, compa
 
 
 # DMRplot  
-#### Plot smoothed methylation in target regions from whole-genome bisulfite sequencing data  
+#### A pipeline to plot smoothed methylation in target regions from whole-genome bisulfite sequencing data  
   
 ## Required arguments:  
 These arguments are required for running DMRplot
@@ -110,7 +110,7 @@ This call is submitted from the shell runs DMRplot on chromosome 21, comparing 3
         Rscript --vanilla /share/lasallelab/programs/DMRfinder/DMRplot.R -n 21 -d /share/lasallelab/Charles/CM_WGBS_CordBlood -r DMRfinder_chr21_silver_DMRs.bed -c 3 -e 3 -g hg38 -o DMRplot  DSS_files/JLCM001A_ DSS_files/JLCM001C_ DSS_files/JLCM002A_ DSS_files/JLCM001B_ DSS_files/JLCM001D_ DSS_files/JLCM002B_
 
 # DMRmethyl  
-#### A pipeline to retrieve smoothed methylation and coverage in predefined differentially-methylated regions from whole-genome bisulfite sequencing data.  
+#### A pipeline to retrieve smoothed methylation and coverage in predefined regions from whole-genome bisulfite sequencing data.  
   
 ## Required arguments: 
 These arguments are required for running DMRmethyl
