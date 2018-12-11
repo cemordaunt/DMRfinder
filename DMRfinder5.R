@@ -579,7 +579,7 @@ pData(BSobj_smoothed) <- pData
 # Subset BSobject by coverage
 cat("\n[DMRfinder] Subsetting BSobject by coverage\n")
 BSobj_cov <- getCoverage(BSobj_smoothed)
-keep_loci <- which(rowSums(BSobj_cov[, BSobj_smoothed$type == "Ctrl"] >= 1) >= numMinCtrl & rowSums(BSobj_cov[, BSobj_smoothed$type == "Exp"] >= 1) >= numMinExp)
+keep_loci <- which(rowSums2(BSobj_cov[, BSobj_smoothed$type == "Ctrl"] >= 1) >= numMinCtrl & rowSums2(BSobj_cov[, BSobj_smoothed$type == "Exp"] >= 1) >= numMinExp)
 BSobj_keep <- BSobj_smoothed[keep_loci,]
 
 # Perform t-tests
