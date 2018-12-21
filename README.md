@@ -63,7 +63,7 @@ These arguments control the output files, including the DMR locations, plots, me
 This call is submitted from the shell and runs DMRfinder on chromosome 21, comparing 3 control and 3 experimental samples.
 
         Rscript --vanilla DMRfinder.R -n 21 -d /share/lasallelab/programs/DMRfinder/test -c 3 -e 3 
-        -a hg38 -o DFtest --mc.cores=6 CTRL1_ CTRL2_ CTRL3_ EXP1_ EXP2_ EXP3_
+        -a hg38 -o DFtest CTRL1_ CTRL2_ CTRL3_ EXP1_ EXP2_ EXP3_
 
 ## Example output: 
 ### DMR info
