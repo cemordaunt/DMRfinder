@@ -71,20 +71,20 @@ Example plot of DMR methylation
         Platform: x86_64-pc-linux-gnu (64-bit)
         Running under: Ubuntu 16.04.5 LTS
 
-Matrix products: default
+        Matrix products: default
         BLAS/LAPACK: /usr/lib/libopenblasp-r0.2.18.so
 
-locale:
+        locale:
         [1] LC_CTYPE=en_US       LC_NUMERIC=C         LC_TIME=en_US       
         [4] LC_COLLATE=en_US     LC_MONETARY=en_US    LC_MESSAGES=en_US   
         [7] LC_PAPER=en_US       LC_NAME=C            LC_ADDRESS=C        
         [10] LC_TELEPHONE=C       LC_MEASUREMENT=en_US LC_IDENTIFICATION=C 
 
-attached base packages:
+        attached base packages:
         [1] splines   stats4    parallel  stats     graphics  grDevices utils    
         [8] datasets  methods   base     
 
-other attached packages:
+        other attached packages:
         [1] scales_1.0.0                permute_0.9-4              
         [3] DSS_2.30.0                  bsseq_1.18.0               
         [5] SummarizedExperiment_1.12.0 GenomicRanges_1.34.0       
@@ -95,8 +95,8 @@ other attached packages:
         [15] magrittr_1.5                remotes_2.0.2              
         [17] BiocManager_1.30.4         
 
-loaded via a namespace (and not attached):
-         [1] Rcpp_1.0.0               compiler_3.5.0           XVector_0.22.0          
+        loaded via a namespace (and not attached):
+        [1] Rcpp_1.0.0               compiler_3.5.0           XVector_0.22.0          
         [4] R.methodsS3_1.7.1        R.utils_2.7.0            bitops_1.0-6            
         [7] tools_3.5.0              DelayedMatrixStats_1.4.0 zlibbioc_1.28.0         
         [10] rhdf5_2.26.1             lattice_0.20-35          BSgenome_1.50.0         
