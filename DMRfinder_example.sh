@@ -2,9 +2,9 @@
 #
 #SBATCH --workdir=/share/lasallelab/programs/DMRfinder/test
 #SBATCH --partition=production				# cluster partition
-#SBATCH --mem=48000                        # total memory
-#SBATCH --time=1-0							# time (day-hr)
-#SBATCH -n 2								# cores
+#SBATCH --mem=48000                   # total memory
+#SBATCH --time=1-0							      # time (day-hr)
+#SBATCH -n 2								          # cores
 
 module load R
 
