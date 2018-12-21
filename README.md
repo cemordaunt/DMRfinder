@@ -66,43 +66,43 @@ This call is submitted from the shell and runs DMRfinder on chromosome 21, compa
 ![Example DMR plot](https://github.com/cemordaunt/DMRfinder/blob/master/DMRplot.png)
 Example plot of DMR methylation
 
-# Session Info
-R version 3.5.0 (2018-04-23)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 16.04.5 LTS
+## Session Info
+        R version 3.5.0 (2018-04-23)
+        Platform: x86_64-pc-linux-gnu (64-bit)
+        Running under: Ubuntu 16.04.5 LTS
 
 Matrix products: default
-BLAS/LAPACK: /usr/lib/libopenblasp-r0.2.18.so
+        BLAS/LAPACK: /usr/lib/libopenblasp-r0.2.18.so
 
 locale:
- [1] LC_CTYPE=en_US       LC_NUMERIC=C         LC_TIME=en_US       
- [4] LC_COLLATE=en_US     LC_MONETARY=en_US    LC_MESSAGES=en_US   
- [7] LC_PAPER=en_US       LC_NAME=C            LC_ADDRESS=C        
-[10] LC_TELEPHONE=C       LC_MEASUREMENT=en_US LC_IDENTIFICATION=C 
+        [1] LC_CTYPE=en_US       LC_NUMERIC=C         LC_TIME=en_US       
+        [4] LC_COLLATE=en_US     LC_MONETARY=en_US    LC_MESSAGES=en_US   
+        [7] LC_PAPER=en_US       LC_NAME=C            LC_ADDRESS=C        
+        [10] LC_TELEPHONE=C       LC_MEASUREMENT=en_US LC_IDENTIFICATION=C 
 
 attached base packages:
- [1] splines   stats4    parallel  stats     graphics  grDevices utils    
- [8] datasets  methods   base     
+        [1] splines   stats4    parallel  stats     graphics  grDevices utils    
+        [8] datasets  methods   base     
 
 other attached packages:
- [1] scales_1.0.0                permute_0.9-4              
- [3] DSS_2.30.0                  bsseq_1.18.0               
- [5] SummarizedExperiment_1.12.0 GenomicRanges_1.34.0       
- [7] GenomeInfoDb_1.18.1         DelayedArray_0.8.0         
- [9] BiocParallel_1.16.2         IRanges_2.16.0             
-[11] matrixStats_0.54.0          S4Vectors_0.20.1           
-[13] Biobase_2.42.0              BiocGenerics_0.28.0        
-[15] magrittr_1.5                remotes_2.0.2              
-[17] BiocManager_1.30.4         
+        [1] scales_1.0.0                permute_0.9-4              
+        [3] DSS_2.30.0                  bsseq_1.18.0               
+        [5] SummarizedExperiment_1.12.0 GenomicRanges_1.34.0       
+        [7] GenomeInfoDb_1.18.1         DelayedArray_0.8.0         
+        [9] BiocParallel_1.16.2         IRanges_2.16.0             
+        [11] matrixStats_0.54.0          S4Vectors_0.20.1           
+        [13] Biobase_2.42.0              BiocGenerics_0.28.0        
+        [15] magrittr_1.5                remotes_2.0.2              
+        [17] BiocManager_1.30.4         
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.0               compiler_3.5.0           XVector_0.22.0          
- [4] R.methodsS3_1.7.1        R.utils_2.7.0            bitops_1.0-6            
- [7] tools_3.5.0              DelayedMatrixStats_1.4.0 zlibbioc_1.28.0         
-[10] rhdf5_2.26.1             lattice_0.20-35          BSgenome_1.50.0         
-[13] Matrix_1.2-14            GenomeInfoDbData_1.2.0   rtracklayer_1.42.1      
-[16] Biostrings_2.50.1        gtools_3.8.1             locfit_1.5-9.1          
-[19] grid_3.5.0               data.table_1.11.8        HDF5Array_1.10.1        
-[22] XML_3.98-1.16            limma_3.38.3             Rhdf5lib_1.4.2          
-[25] GenomicAlignments_1.18.0 Rsamtools_1.34.0         colorspace_1.3-2        
-[28] RCurl_1.95-4.11          munsell_0.5.0            R.oo_1.22.0 
+         [1] Rcpp_1.0.0               compiler_3.5.0           XVector_0.22.0          
+        [4] R.methodsS3_1.7.1        R.utils_2.7.0            bitops_1.0-6            
+        [7] tools_3.5.0              DelayedMatrixStats_1.4.0 zlibbioc_1.28.0         
+        [10] rhdf5_2.26.1             lattice_0.20-35          BSgenome_1.50.0         
+        [13] Matrix_1.2-14            GenomeInfoDbData_1.2.0   rtracklayer_1.42.1      
+        [16] Biostrings_2.50.1        gtools_3.8.1             locfit_1.5-9.1          
+        [19] grid_3.5.0               data.table_1.11.8        HDF5Array_1.10.1        
+        [22] XML_3.98-1.16            limma_3.38.3             Rhdf5lib_1.4.2          
+        [25] GenomicAlignments_1.18.0 Rsamtools_1.34.0         colorspace_1.3-2        
+        [28] RCurl_1.95-4.11          munsell_0.5.0            R.oo_1.22.0 
