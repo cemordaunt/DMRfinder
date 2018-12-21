@@ -6,10 +6,10 @@ By Charles Mordaunt
 
 Readme updated 12/20/18
 
-## Running DMRfinder
+## Running DMRfinder:
 First prepare WGBS data in DSS file format for at least two groups of two samples. Then run DMRfinder.R with the appropriate arguments as in DMRfinder_example.sh. As part of the pipeline, DMRfinder.R will check and install needed packages.
 
-## DSS file format
+## DSS file format:
 Input files should be split by each sample and each chromosome. The format should be in DSS which is a tab-delimited text file with 4 columns: chromosome (chr), position (pos), total reads (N), and methylated reads (X) (see below).
         
         chr	        pos	N	X
@@ -79,7 +79,7 @@ chr21 | 43985999 | 43986281 | 8 | 282 | 35.25 | 26.54 | 4.15 | 0.06 | 0.16 | 0.3
 ### DMR plot
 ![Example DMR plot](https://github.com/cemordaunt/DMRfinder/blob/master/DMRplot.png)
 
-## Session Info
+## Session Info:
         R version 3.5.0 (2018-04-23)
         Platform: x86_64-pc-linux-gnu (64-bit)
         Running under: Ubuntu 16.04.5 LTS
