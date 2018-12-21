@@ -65,7 +65,7 @@ This call is submitted from the shell and runs DMRfinder on chromosome 21, compa
         Rscript --vanilla DMRfinder.R -n 21 -d /share/lasallelab/programs/DMRfinder/test -c 3 -e 3 
         -a hg38 -o DFtest CTRL1_ CTRL2_ CTRL3_ EXP1_ EXP2_ EXP3_
 
-Also see the example data in the testData directory of this repository.
+Also see the example data in the TestData directory of this repository.
 
 ## Example output: 
 ### DMR info
