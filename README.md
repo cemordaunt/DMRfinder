@@ -78,7 +78,6 @@ chr21 | 43985999 | 43986281 | 8 | 282 | 35.25 | 26.54 | 4.15 | 0.06 | 0.16 | 0.3
 
 ### DMR plot
 ![Example DMR plot](https://github.com/cemordaunt/DMRfinder/blob/master/DMRplot.png)
-Example plot of DMR methylation
 
 ## Session Info
         R version 3.5.0 (2018-04-23)
