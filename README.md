@@ -50,7 +50,8 @@ These arguments control the output files, including the DMR locations, plots, me
         --background = Output bed file of background DMRs [default = TRUE]  
         --gold_bed = Output bed file of locations for gold DMRs [default = TRUE]  
         --silver_plots = Output pdf file of plots for silver DMRs [default = FALSE]  
-        --meth = Output table of smoothed methylation for each sample at each silver DMR [default = FALSE]  
+        --meth = Output table of smoothed methylation for each sample at each silver DMR 
+          [default = FALSE]  
         --cov = Output table of total coverage for each sample at each DMR [default = FALSE]  
         --background_cov = Output table of total coverage for each sample at each background DMR
           [default = FALSE]  
@@ -61,8 +62,21 @@ These arguments control the output files, including the DMR locations, plots, me
 ## Example call:
 This call is submitted from the shell and runs DMRfinder on chromosome 21, comparing 3 control and 3 experimental samples.
 
-        Rscript --vanilla DMRfinder5.R -n 21 -d /share/lasallelab/programs/DMRfinder/test -c 3 -e 3 -a hg38 -o DFtest --mc.cores=6 CTRL1_ CTRL2_ CTRL3_ EXP1_ EXP2_ EXP3_
+        Rscript --vanilla DMRfinder5.R -n 21 -d /share/lasallelab/programs/DMRfinder/test -c 3 -e 3 
+        -a hg38 -o DFtest --mc.cores=6 CTRL1_ CTRL2_ CTRL3_ EXP1_ EXP2_ EXP3_
 
+## Example output: 
+### DMR info
+
+chr | start | end | CpGs | width | invdensity | areaStat | maxStat | tstat_sd | Ctrl_mean | Exp_mean | meanDiff | direction | FWER | Rel_FWER
+---|---|---|---|---|---|---|---|---|---|---|---|---|---|---
+chr21 | 46699259 | 46699321 | 16 | 62 | 3.88 | -143.18 | -8.76 | 0.07 | 0.73 | 0.16 | -0.58 | hypo | 0 | 0.00
+chr21 | 43779213 | 43779862 | 9 | 649 | 72.11 | 42.30 | 5.35 | 0.06 | 0.44 | 0.75 | 0.31 | hyper | 14 | 0.78
+chr21 | 45482332 | 45482675 | 9 | 343 | 38.11 | 29.90 | 3.50 | 0.06 | 0.52 | 0.78 | 0.26 | hyper | 18 | 1.00
+chr21 | 34890783 | 34890828 | 10 | 45 | 4.50 | 28.18 | 2.85 | 0.06 | 0.13 | 0.29 | 0.16 | hyper | 18 | 1.00
+chr21 | 43985999 | 43986281 | 8 | 282 | 35.25 | 26.54 | 4.15 | 0.06 | 0.16 | 0.35 | 0.20 | hyper | 18 | 1.00
+
+### DMR plot
 ![Example DMR plot](https://github.com/cemordaunt/DMRfinder/blob/master/DMRplot.png)
 Example plot of DMR methylation
 
