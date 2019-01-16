@@ -4,7 +4,7 @@
 
 By Charles Mordaunt
 
-Readme updated 12/20/18
+Readme updated 1/16/19
 
 ## Running DMRfinder:
 First prepare WGBS data in DSS file format for at least two groups of two samples. Then run DMRfinder.R with the appropriate arguments as in DMRfinder_example.sh. As part of the pipeline, DMRfinder.R will check and install needed packages.
@@ -80,6 +80,36 @@ chr21 | 43985999 | 43986281 | 8 | 282 | 35.25 | 26.54 | 4.15 | 0.06 | 0.16 | 0.3
 
 ### DMR plot
 ![Example DMR plot](https://github.com/cemordaunt/DMRfinder/blob/master/DMRplot.png)
+
+## Publications Using DMRfinder:
+Mordaunt CE, Kieffer DA, Shibata NM, Czlonkowska A, Litwin T, Weiss KH, Zhu Y, Bowlus CL, Sarkar S, Cooper S, Wan YJY, Ali M, 
+LaSalle JM, and Medici V. (2019) Epigenomic signatures in liver and blood of Wilson disease patients include 
+hypermethylation of liver-specific enhancers. Manuscript under review at *Epigenetics & Chromatin*.
+
+Zhu Y, Mordaunt CE, Yasui DH, Marathe R, Coulson RL, Dunaway KW, Walker CK, Ozonoff S, Hertz-Picciotto I, Schmidt RJ, and 
+LaSalle JM. (2019) Placental DNA methylation levels at *CYP2E1* and *IRS2* are associated with child outcome and 
+genetic or nutrient modifiers in a prospective autism study. Manuscript submitted to *PLoS Genetics*.
+
+Mordaunt CE, Shibata NM, Kieffer DA, Czlonkowska A, Litwin T, Weiss KH, Gotthardt DN, Olson K, Wei D, Cooper S, Wan YJ, Ali M, 
+LaSalle JM, and Medici V. (2018) Epigenetic changes of the thioredoxin system in the tx-j mouse model and in patients 
+with Wilson disease. *Human Molecular Genetics* 27(22):3854-3869.
+
+Vogel Ciernia A, Laufer BI, Dunaway KW, Mordaunt CE, Coulson RL, Totah TS, Stolzenberg DS, Frahm JC, Singh-Taylor A, Baram TZ, 
+LaSalle JM, and Yasui DH. (2018) Experience-dependent neuroplasticity of the developing hypothalamus: integrative 
+epigenomic approaches. *Epigenetics* 13(3):318-330.
+
+Coulson RL, Yasui DH, Dunaway KW, Laufer BI, Vogel-Ciernia A, Zhu Y, Mordaunt CE, Totah TS, and LaSalle JM. (2018) *Snord116*-dependent diurnal rhythm of DNA methylation in mouse cortex. *Nature Communications* 9:1616.
+
+Lopez SJ, Dunaway KW, Islam MS, Mordaunt CE, Vogel Ciernia A, Meguro-Horike M, Horike S, Segal DJ, and LaSalle JM. (2017) 
+*UBE3A*-mediated regulation of imprinted genes and epigenome-wide marks in human neurons. *Epigenetics* 12(11):982-990.
+
+Dunaway K, Goorha S, Matelski L, Urraca N, Lein PJ, Korf I, Reiter LT, and LaSalle JM. (2017) Dental pulp stem cells model 
+early life and imprinted DNA methylation patterns. *Stem Cells* 35(4):981-988.
+
+Dunaway KW*, Islam MS*, Coulson RL, Lopez SJ, Vogel Ciernia A, Chu R, Yasui DH, Pessah I, Lott P, Mordaunt CE, Meguro-Horike 
+M, Horike S, Korf I, and LaSalle JM. (2016) Cumulative impact of large chromosomal duplications and polychlorinated 
+biphenyl exposure on DNA methylation, chromatin, and expression of autism candidate genes. *Cell Reports* 17(11): 
+3035-3048. 
 
 ## Session Info:
         R version 3.5.0 (2018-04-23)
