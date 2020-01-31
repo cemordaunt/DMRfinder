@@ -4,8 +4,6 @@
 
 By Charles Mordaunt
 
-Readme updated 1/16/19
-
 ## Running DMRfinder:
 First prepare WGBS data in DSS file format for at least two groups of two samples. Then run DMRfinder.R with the appropriate arguments as in DMRfinder_example.sh. As part of the pipeline, DMRfinder.R will check and install needed packages.
 
@@ -84,11 +82,11 @@ chr21 | 43985999 | 43986281 | 8 | 282 | 35.25 | 26.54 | 4.15 | 0.06 | 0.16 | 0.3
 ## Publications Using DMRfinder:
 Mordaunt CE, Kieffer DA, Shibata NM, Czlonkowska A, Litwin T, Weiss KH, Zhu Y, Bowlus CL, Sarkar S, Cooper S, Wan YJY, Ali M, 
 LaSalle JM, and Medici V. (2019) Epigenomic signatures in liver and blood of Wilson disease patients include 
-hypermethylation of liver-specific enhancers. Manuscript under review at *Epigenetics & Chromatin*.
+hypermethylation of liver-specific enhancers. *Epigenetics & Chromatin* 12(10):1-16.
 
 Zhu Y, Mordaunt CE, Yasui DH, Marathe R, Coulson RL, Dunaway KW, Walker CK, Ozonoff S, Hertz-Picciotto I, Schmidt RJ, and 
 LaSalle JM. (2019) Placental DNA methylation levels at *CYP2E1* and *IRS2* are associated with child outcome and 
-genetic or nutrient modifiers in a prospective autism study. Manuscript submitted to *PLoS Genetics*.
+genetic or nutrient modifiers in a prospective autism study. *Human Molecular Genetics* 28(16):2659-2674.
 
 Mordaunt CE, Shibata NM, Kieffer DA, Czlonkowska A, Litwin T, Weiss KH, Gotthardt DN, Olson K, Wei D, Cooper S, Wan YJ, Ali M, 
 LaSalle JM, and Medici V. (2018) Epigenetic changes of the thioredoxin system in the tx-j mouse model and in patients 
